@@ -1,0 +1,35 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <base href="/">
+        @Styles.Render("~/Content/css")
+    </head>
+    <body>
+        <div class="container row">
+
+            <div class="col-md-3 sidebar-nav">
+                <ul>
+                    <li class="sidebar-brand">
+                        Библиотека
+                    </li>
+                    <li>
+                        <a href="/books">Книги</a>
+                    </li>
+                    <li>
+                        <a href="/authors">Авторы</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="col-md-9 body">
+                <div class="container-fluid" ng-view>
+                </div>
+            </div>
+
+        </div>
+
+        @Scripts.Render("~/bundles/js")
+        @Scripts.Render("~/bundles/template")
+    </body>
+</html>

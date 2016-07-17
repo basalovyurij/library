@@ -1,0 +1,107 @@
+﻿<h1>{{ book.Id ? "Редактирование" : "Добавление" }} книги</h1>
+<div class="row">
+    <div class="col-md-8">
+ 
+        <form ng-submit="editBook()" name="form">
+            <div class="bg-danger alert validationErrors" ng-show="validationErrors">
+                <ul>
+                    <li ng-repeat="error in validationErrors">{{error}}</li>
+                </ul>
+            </div> 
+
+            <div class="form-group">
+                <label for="Name">Заголовок*</label>
+                <input 
+                    name="Name" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Введите заголовок" 
+                    ng-model="book.Name"
+                    ng-required="true"
+                    ng-maxlength="30">
+                <p>
+                  <small class="validation-error" ng-hide="form.Name.$valid">Обязательное поле длиной не более 30 символов</small>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="Authors">Авторы*</label>
+                <ui-select 
+                    multiple 
+                    name="Authors" 
+                    ng-model="select.authors" 
+                    theme="select2" 
+                    style="width:520px;" 
+                    title="Выберите авторов">
+
+                    <ui-select-match placeholder="Выберите авторов">{{$item.SurName}} {{$item.FirstName}}</ui-select-match>
+                    <ui-select-choices repeat="author in authors | filter:$select.search">
+                        {{author.SurName}} {{author.FirstName}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group">
+                <label for="PageCount">Кол-во страниц*</label>
+                <input 
+                    name="PageCount" 
+                    type="number" 
+                    class="form-control" 
+                    placeholder="Введите кол-во страниц" 
+                    ng-model="book.PageCount"
+                    ng-required="true"
+                    min="1"
+                    max="10000">
+                <p>
+                  <small class="validation-error" ng-hide="form.PageCount.$valid">Обязательное поле в пределах от 1 до 10000</small>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="Publishment">Издательство</label>
+                <input 
+                    name="Publishment" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Введите издательство" 
+                    ng-model="book.Publishment"
+                    ng-maxlength="30">
+                <p>
+                  <small class="validation-error" ng-hide="form.Publishment.$valid">Поле длиной не более 30 символов</small>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="PublishYear">Год публикации</label>
+                <input 
+                    name="PublishYear" 
+                    type="number"
+                    class="form-control" 
+                    placeholder="Введите год публикации" 
+                    ng-model="book.PublishYear"
+                    min="1800"
+                    max="2100">                
+                <p>
+                  <small class="validation-error" ng-hide="form.PageCount.$valid">Обязательное поле в пределах от 1800 до 2100 года</small>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="ISBN">ISBN</label>
+                <input 
+                    name="ISBN" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Например 1-4493-4485-2" 
+                    ng-model="book.ISBN"
+                    ng-required="true"
+                    isbn10>             
+                <p>
+                  <small class="validation-error" ng-hide="form.PageCount.$valid">Введите валидный ISBN</small>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="File">Изображение</label>
+                <input name="File" type="file" ng-model="file" accept="image/*" maxsize="1024" base-sixty-four-input>
+                <span ng-show="file.$error.maxsize">Файл не должен превышать 1 Мб</span>
+            </div>
+            <a href="/books" class="btn btn-default">Отмена</a>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>

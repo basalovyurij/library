@@ -1,0 +1,43 @@
+﻿<h1>{{ author.Id ? "Редактирование" : "Добавление" }} автора</h1>
+<div class="row">
+    <div class="col-md-8"> 
+        <form ng-submit="editAuthor()" name="form">
+            <div class="bg-danger alert validationErrors" ng-show="validationErrors">
+                <ul>
+                    <li ng-repeat="error in validationErrors">{{error}}</li>
+                </ul>
+            </div> 
+
+            <div class="form-group">
+                <label for="FirstName">Имя*</label>
+                <input 
+                    name="FirstName" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Введите имя" 
+                    ng-model="author.FirstName"
+                    ng-required="true"
+                    ng-maxlegth="20">
+                <p>
+                  <small class="validation-error" ng-hide="form.FirstName.$valid">Обязательное поле длиной не более 20 символов</small>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="SurName">Фамилия*</label>
+                <input 
+                    name="SurName" 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Введите фамилию" 
+                    ng-model="author.SurName"
+                    ng-required="true"
+                    ng-maxlength="20">
+                <p>
+                  <small class="validation-error" ng-hide="form.SurName.$valid">Обязательное поле длиной не более 20 символов</small>
+                </p>
+            </div>
+            <a href="/authors" class="btn btn-default">Отмена</a>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>

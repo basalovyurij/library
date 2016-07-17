@@ -1,0 +1,72 @@
+﻿<p class="pull-right">
+    <a href="/book/add" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus"></span>
+        Добавить
+    </a>
+</p>
+
+<h1>Список книг</h1>
+ 
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th style="min-width: 102px;">
+                <a 
+                    href="javascipt:void(0)" 
+                    ng-click="setSortType('Name'); setSortReverse(!getSortReverse())">
+
+                    Название
+                    <span 
+                        ng-show="getSortType() == 'Name' && !getSortReverse()" 
+                        class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    <span 
+                        ng-show="getSortType() == 'Name' && getSortReverse()" 
+                        class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                </a>
+            </th>
+            <th>Авторы</th>
+            <th>Кол-во стр.</th>
+            <th>Издательство</th>
+            <th>
+                <a 
+                    href="javascipt:void(0)" 
+                    ng-click="setSortType('PublishYear'); setSortReverse(!getSortReverse())">
+
+                    Год издания
+                    <span 
+                        ng-show="getSortType() == 'PublishYear' && !getSortReverse()" 
+                        class="glyphicon glyphicon-sort-by-order"></span>
+                    <span 
+                        ng-show="getSortType() == 'PublishYear' && getSortReverse()" 
+                        class="glyphicon glyphicon-sort-by-order-alt"></span>
+                </a>
+            </th>
+            <th>ISBN</th>
+            <th>Изображение</th>
+            <th style="min-width: 70px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="book in books | orderBy:getSortType():getSortReverse()">
+            <td>{{book.Name}}</td>
+            <td>
+                <div ng-repeat="author in book.Authors">
+                    {{author.SurName}} {{author.FirstName}}
+                </div>
+            </td>
+            <td>{{book.PageCount}}</td>
+            <td>{{book.Publishment}}</td>
+            <td>{{book.PublishYear}}</td>
+            <td>{{book.ISBN}}</td>
+            <td><img ng-src='{{book.Image}}' /></td>
+            <td>
+                <a href="/book/edit/{{book.Id}}" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a href="/book/delete/{{book.Id}}" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

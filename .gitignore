@@ -1,0 +1,7 @@
+packages/
+Library.Web/bin/
+Library.Web/obj/
+Library.Domain/bin/
+Library.Domain/obj/
+Library.Model/bin/
+Library.Model/obj/
